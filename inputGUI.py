@@ -8,14 +8,15 @@ import GUI
 import FileFunction
 class inputGUI(object):
     '''
-    classdocs
+    Create GUI that will display contents of text file / Save contents
     '''
 
     def __init__(self, params):
         '''
         Constructor
         '''
-        
+    
+    #Create GUI that will take input.
     def createTextAreaGUI(self, contents, givenFilePath):
         G = GUI.Interface
         FF = FileFunction.FileFunction

@@ -9,7 +9,7 @@ from tkinter.filedialog import askopenfilename, asksaveasfilename
 import os
 class FileFunction(object):
     '''
-    classdocs
+    Class that handles any reading or writing for text files / Dat file
     '''
 
     def __init__(self, params):
@@ -17,6 +17,7 @@ class FileFunction(object):
         Constructor
         '''
     
+    #Open text file
     def openTextFile(self, filePath):
         if filePath is None:
             Tk().withdraw()
@@ -35,6 +36,7 @@ class FileFunction(object):
             FileFunction.writeToDatFile(0, filePath, os.path.basename(filePath))
             return contents
     
+    #Create text file.
     def createText(self, contents):
         Tk().withdraw()
         filePath = asksaveasfilename(defaultextension=".txt")
@@ -45,22 +47,26 @@ class FileFunction(object):
         f.close()
         return filePath
     
+    #Save text file.
     def saveText(self, filePath, contents):
         f = open(filePath, 'w')
         f.write(contents)
         f.close()
-        
+    
+    #Create dat file.
     def createDatFile(self):
         f = open('list.dat', 'a')
         f.close()
-        
+    
+    #Check to see if Dat file exists, If it doesn't then create it.
     def DatFileExists(self):
         path = os.path.dirname(os.path.realpath(__file__))
         if os.path.exists(path + "/list.dat"):
             return True
         else:
             return False
-        
+    
+    #Read the Dat file and return a list of text files in Dat file.
     def getFileList(self):
         results = []
         datFile = os.path.dirname(os.path.realpath(__file__)) + "/list.dat"
@@ -71,6 +77,7 @@ class FileFunction(object):
         f.close()
         return results
     
+    #Open text file and return the contents
     def getFileContents(self, index):
         datFile = os.path.dirname(os.path.realpath(__file__)) + "/list.dat"
         f = open(datFile, 'r')
@@ -80,7 +87,8 @@ class FileFunction(object):
                 filePath = fields[1]
         return FileFunction.openTextFile(0, filePath)
         f.close()
-        
+    
+    #Check to see if file exists within the Dat file and if it does return the index and line from Dat file.
     def fileExists(self, filePath):
         datFile = os.path.dirname(os.path.realpath(__file__)) + "/list.dat"
         f = open(datFile, 'r')
@@ -93,7 +101,8 @@ class FileFunction(object):
                 index = index + 1
         return None,None
         f.close()
-        
+    
+    #Read Dat file and return the results.
     def readDatFile(self):
         results = []
         datFile = os.path.dirname(os.path.realpath(__file__)) + "/list.dat"
@@ -103,7 +112,8 @@ class FileFunction(object):
             results.append(fields[0] + "|" +  fields[1] + "|" + fields[2])
         f.close()
         return results
-        
+    
+    #Write information to Dat file.
     def writeToDatFile(self, filePath, textFile):
         datFile = os.path.dirname(os.path.realpath(__file__)) + "/list.dat"
         results = FileFunction.readDatFile(0)

@@ -16,7 +16,8 @@ class Interface(object):
         '''
         Constructor
         '''
-        
+    
+    #Create main GUI
     def createGUI(self):
         GUI = Tk()
         GUI.title("Python Picker")
